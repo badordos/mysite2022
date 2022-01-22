@@ -13,6 +13,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [\App\Http\Controllers\CVController::class, 'welcome'])->name('cv.welcome');
+Route::post('/send', [\App\Http\Controllers\CVController::class, 'sendMail'])->name('cv.sendMail');
