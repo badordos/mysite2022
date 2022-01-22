@@ -40,7 +40,6 @@ services:
         networks:
             - yarlykov_network
 
-
 networks:
     yarlykov_network:
         driver: bridge
