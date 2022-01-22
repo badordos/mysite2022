@@ -32,10 +32,11 @@ services:
             - yarlykov_network
     npm:
         image: node:latest
+        command: npm start
         volumes:
             - ./:/var/www/yarlykov
         working_dir: /var/www/yarlykov
-        entrypoint: [ 'npm', '--no-bin-links' ]
+        entrypoint: [ 'npm' ]
         networks:
             - yarlykov_network
 
