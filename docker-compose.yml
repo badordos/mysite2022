@@ -39,6 +39,12 @@ services:
         entrypoint: [ 'npm' ]
         networks:
             - yarlykov_network
+    redis:
+        image: redis:4.0
+        ports:
+            - "6382:6379"
+        networks:
+            - yarlykov_network
 
 networks:
     yarlykov_network:
