@@ -1,7 +1,13 @@
 FROM php:8.1-fpm
 
 RUN apt-get update && \
-    docker-php-ext-install pdo pdo_mysql pcntl posix
+    docker-php-ext-install pdo pdo_mysql pcntl posix \
+
+RUN apt-get install -y libcurl4-openssl-dev pkg-config libssl-dev
+RUN pecl install mongodb \
+    && echo "extension=mongodb.so" > $PHP_INI_DIR/conf.d/mongo.ini  \
+    && pecl config-set php_ini $PHP_INI_DIR
+
 RUN apt-get install -y git
 
 # INSTALL COMPOSER
