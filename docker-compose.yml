@@ -30,15 +30,6 @@ services:
             MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
         networks:
             - yarlykov_network
-    npm:
-        image: node:latest
-        command: npm start
-        volumes:
-            - ./:/var/www/yarlykov
-        working_dir: /var/www/yarlykov
-        entrypoint: [ 'npm' ]
-        networks:
-            - yarlykov_network
     redis:
         image: redis:4.0
         ports:
