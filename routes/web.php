@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,3 +17,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [\App\Http\Controllers\CVController::class, 'welcome'])->name('cv.welcome');
 Route::post('/send', [\App\Http\Controllers\CVController::class, 'sendMail'])->name('cv.sendMail');
+
+Route::get('/spa', function () {
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+});
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->name('dashboard');
