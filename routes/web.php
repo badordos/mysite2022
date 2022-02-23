@@ -27,6 +27,10 @@ Route::get('/spa', function () {
     ]);
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->name('dashboard');
+Route::group(['middleware'=> ['auth:sanctum', 'verified']], function () {
+    Route::get('/dashboard', function () {return Inertia::render('Dashboard');})->name('dashboard');
+});
+
+Route::group(['prefix'=>'admin', 'middleware'=> ['auth:sanctum', 'verified']], function () {
+    Route::get('/users', function () {return Inertia::render('Users');})->name('admin.users');
+});
