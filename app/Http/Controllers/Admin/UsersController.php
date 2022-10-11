@@ -7,6 +7,7 @@ use App\Http\Resources\Admin\UserResource;
 use App\Models\User;
 use App\Repositories\UsersRepo;
 use Illuminate\Http\Request;
+use Laravel\Jetstream\Jetstream;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class UsersController extends Controller
@@ -14,7 +15,8 @@ class UsersController extends Controller
     public function __construct(private UsersRepo $usersRepo){}
 
     /**
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @param \Illuminate\Http\Request $request
+     * @return \Inertia\Response
      */
     public function index(Request $request)
     {
@@ -24,7 +26,9 @@ class UsersController extends Controller
             ->paginate(10)
             ->appends($request->query());
 
-        return UserResource::collection($users);
+        return Jetstream::inertia()->render($request, 'Admin/Users/Index', [
+            'users' => $users,
+        ]);
     }
 
     /**

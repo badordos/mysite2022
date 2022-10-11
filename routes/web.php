@@ -32,5 +32,5 @@ Route::group(['middleware'=> ['auth:sanctum', 'verified']], function () {
 });
 
 Route::group(['prefix'=>'admin', 'middleware'=> ['auth:sanctum', 'verified']], function () {
-    Route::get('/users', function () {return Inertia::render('Users');})->name('admin.users');
+    Route::get('/users', [\App\Http\Controllers\Admin\UsersController::class, 'index'])->name('admin.users');
 });

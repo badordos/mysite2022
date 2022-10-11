@@ -47,11 +47,11 @@
                         </tbody>
                     </table>
                 </div>
-
-                <Pagination v-if="data.links" class="mt-6" :links="data.meta"/>
-
             </div>
         </div>
+
+        <br>
+        <Pagination :links="data"></Pagination>
     </div>
 </template>
 
