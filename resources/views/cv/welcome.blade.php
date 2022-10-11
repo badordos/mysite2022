@@ -28,7 +28,7 @@
 <header class="d-print-none">
     <div class="container text-center text-lg-left">
         <div class="pt-4 clearfix">
-            <h1 class="site-title mb-0"><a href="/">Vladislav Yarlykov</a></h1>
+            <h1 class="site-title mb-0"><a href="/">{{$data['name']}}</a></h1>
             <div class="site-nav">
                 <nav role="navigation">
                     <ul class="nav justify-content-center">
@@ -63,19 +63,28 @@
                                 <div class="avatar p-1"><img class="img-thumbnail shadow-2-strong" src="{{asset('images/avatar.jpg')}}" width="160" height="160"/></div>
                                 <div class="header-bio mt-3">
                                     <div data-aos="zoom-in" data-aos-delay="0">
-                                        <h2 class="h1">Vladislav Yarlykov</h2>
-                                        <p>back-end developer PHP/Laravel</p>
+                                        <h2 class="h1">{{$data['name']}}</h2>
+                                        <p>{{$data['header']}}</p>
                                     </div>
                                     <div class="header-social mb-3 d-print-none" data-aos="zoom-in" data-aos-delay="200">
                                         <nav role="navigation">
                                             <ul class="nav justify-content-center">
 {{--                                                <li class="nav-item"><a class="nav-link" href="https://twitter.com/templateflip" title="Twitter"><i class="fab fa-twitter"></i><span class="menu-title sr-only">Twitter</span></a>--}}
 {{--                                                </li>--}}
-{{--                                                <li class="nav-item"><a class="nav-link" href="https://www.facebook.com/templateflip" title="Facebook"><i class="fab fa-facebook"></i><span class="menu-title sr-only">Facebook</span></a>--}}
-{{--                                                </li>--}}
-{{--                                                <li class="nav-item"><a class="nav-link" href="https://www.instagram.com/templateflip" title="Instagram"><i class="fab fa-instagram"></i><span class="menu-title sr-only">Instagram</span></a>--}}
-{{--                                                </li>--}}
-                                                <li class="nav-item"><a class="nav-link" href="https://github.com/badordos" title="Github"><i class="fab fa-github"></i><span class="menu-title sr-only">Github</span></a>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="{{$data['facebook']}}" title="Facebook" target="_blank">
+                                                        <i class="fab fa-facebook"></i><span class="menu-title sr-only">Facebook</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="{{$data['instagram']}}" title="Instagram" target="_blank">
+                                                        <i class="fab fa-instagram"></i><span class="menu-title sr-only">Instagram</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="{{$data['github']}}" title="Github" target="_blank">
+                                                        <i class="fab fa-github"></i><span class="menu-title sr-only">Github</span>
+                                                    </a>
                                                 </li>
                                             </ul>
                                         </nav>
@@ -142,40 +151,18 @@
                 <div class="skills-section">
                     <h2 class="h2 fw-light mb-4">Professional Skills</h2>
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3"><span class="fw-bolder">PHP/Laravel</span>
-                                <div class="progress my-2 rounded" style="height: 20px">
-                                    <div class="progress-bar bg-info" role="progressbar" data-aos="zoom-in-right"
-                                         data-aos-delay="100" data-aos-anchor=".skills-section" style="width: 95%;"
-                                         aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">Expert
+                        @foreach($data['skills'] as $key => $skill)
+                            <div class="col-md-6">
+                                <div class="mb-3"><span class="fw-bolder">{{$key}}</span>
+                                    <div class="progress my-2 rounded" style="height: 20px">
+                                        <div class="progress-bar bg-info" role="progressbar" data-aos="zoom-in-right"
+                                             data-aos-delay="100" data-aos-anchor=".skills-section" style="width: {{$skill['value']}}%;"
+                                             aria-valuenow="{{$skill['value']}}" aria-valuemin="0" aria-valuemax="100">{{$skill['title']}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="mb-3"><span class="fw-bolder">Docker</span>
-                                <div class="progress my-2 rounded" style="height: 20px">
-                                    <div class="progress-bar bg-info" role="progressbar" data-aos="zoom-in-right"
-                                         data-aos-delay="300" data-aos-anchor=".skills-section" style="width: 85%"
-                                         aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">Specialist
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3"><span class="fw-bolder">Git | CI | CD</span>
-                                <div class="progress my-2 rounded" style="height: 20px">
-                                    <div class="progress-bar bg-info" role="progressbar" data-aos="zoom-in-right"
-                                         data-aos-delay="300" data-aos-anchor=".skills-section" style="width: 85%"
-                                         aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">Specialist
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3"><span class="fw-bolder">JS/VueJS</span>
-                                <div class="progress my-2 rounded" style="height: 20px">
-                                    <div class="progress-bar bg-info" role="progressbar" data-aos="zoom-in-right"
-                                         data-aos-delay="200" data-aos-anchor=".skills-section" style="width: 75%"
-                                         aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">Advance
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
 {{--                        <div class="col-md-6">--}}
 {{--                            <div class="mb-3"><span class="fw-bolder">Linux-administration</span>--}}
 {{--                                <div class="progress my-2 rounded" style="height: 20px">--}}
@@ -217,71 +204,19 @@
                 <div class="work-experience-section">
                     <h2 class="h2 fw-light mb-4">Work Experience</h2>
                     <div class="timeline">
-                        <div class="timeline-card timeline-card-info" data-aos="fade-in" data-aos-delay="0">
-                            <div class="timeline-head px-4 pt-3">
-                                <div class="h5">
-{{--                                    PHP/Laravel back-end developer<span class="text-muted h6"> at --}}
-                                        <a target="_blank" href="https://gorserv.com">Gorserv</a></div>
+                        @foreach(array_reverse($data['works']) as $key => $work)
+                            <div class="timeline-card timeline-card-info" data-aos="fade-in" data-aos-delay="0">
+                                <div class="timeline-head px-4 pt-3">
+                                    <div class="h5">
+                                        PHP/Laravel developer<span class="text-muted h6"> at
+                                            <a target="_blank" href="{{$work['link']}}">{{$key}}</a></span></div>
+                                </div>
+                                <div class="timeline-body px-4 pb-4">
+                                    <div class="text-muted text-small mb-3">{{$work['from']}} - {{$work['to']}}</div>
+                                    <div>{{$work['desc']}}</div>
+                                </div>
                             </div>
-                            <div class="timeline-body px-4 pb-4">
-                                <div class="text-muted text-small mb-3">September, 2021 - Present</div>
-                                <div>Uber Business Model for specilalists who specializes in installing and maintaining systems used and more...</div>
-                            </div>
-                        </div>
-                        <div class="timeline-card timeline-card-info" data-aos="fade-in" data-aos-delay="200">
-                            <div class="timeline-head px-4 pt-3">
-                                <div class="h5"><a target="_blank" href="https://www.traffic-isobar.ru/">Traffic Isobar</a></div>
-                            </div>
-                            <div class="timeline-body px-4 pb-4">
-                                <div class="text-muted text-small mb-3">December, 2020 - September, 2021</div>
-                                <div>Digital agency specializes in advertising campaign with web-studio projects</div>
-                            </div>
-                        </div>
-                        <div class="timeline-card timeline-card-info" data-aos="fade-in" data-aos-delay="400">
-                            <div class="timeline-head px-4 pt-3">
-                                <div class="h5"><a target="_blank" href="https://flor2u.ru">Flor2u.ru</a></div>
-                            </div>
-                            <div class="timeline-body px-4 pb-4">
-                                <div class="text-muted text-small mb-3">Marth, 2020 - December, 2020</div>
-                                <div>Marketplace agregator with CRM system</div>
-                            </div>
-                        </div>
-                        <div class="timeline-card timeline-card-info" data-aos="fade-in" data-aos-delay="400">
-                            <div class="timeline-head px-4 pt-3">
-                                <div class="h5"><a target="_blank" href="https://online-express.ru/">Online-express.ru</a></div>
-                            </div>
-                            <div class="timeline-body px-4 pb-4">
-                                <div class="text-muted text-small mb-3">June, 2019 - Marth, 2020</div>
-                                <div>Tourism IT solution. Hotels, Aviatickets, transfers and more in 1 app.</div>
-                            </div>
-                        </div>
-                        <div class="timeline-card timeline-card-info" data-aos="fade-in" data-aos-delay="400">
-                            <div class="timeline-head px-4 pt-3">
-                                <div class="h5"><a target="_blank" href="https://cbo.ru">Cbo.ru</a></div>
-                            </div>
-                            <div class="timeline-body px-4 pb-4">
-                                <div class="text-muted text-small mb-3">January, 2019 - May, 2019</div>
-                                <div>CRM system for Center of bussiness education</div>
-                            </div>
-                        </div>
-                        <div class="timeline-card timeline-card-info" data-aos="fade-in" data-aos-delay="400">
-                            <div class="timeline-head px-4 pt-3">
-                                <div class="h5"><a target="_blank" href="https://flagstudio.ru">Flag studio</a></div>
-                            </div>
-                            <div class="timeline-body px-4 pb-4">
-                                <div class="text-muted text-small mb-3">September, 2018 - January, 2019</div>
-                                <div>Outsource development web-studio</div>
-                            </div>
-                        </div>
-                        <div class="timeline-card timeline-card-info" data-aos="fade-in" data-aos-delay="400">
-                            <div class="timeline-head px-4 pt-3">
-                                <div class="h5"><a target="_blank" href="https://versite.ru">Versite studio</a></div>
-                            </div>
-                            <div class="timeline-body px-4 pb-4">
-                                <div class="text-muted text-small mb-3">November, 2017 - September, 2018 </div>
-                                <div>Outsource development web-studio</div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
