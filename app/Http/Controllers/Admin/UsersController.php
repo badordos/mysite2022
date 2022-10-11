@@ -32,13 +32,12 @@ class UsersController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Inertia\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        return Jetstream::inertia()->render($request, 'Admin/Users/Form', []);
     }
 
     /**

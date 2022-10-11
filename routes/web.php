@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\Admin\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,10 +28,14 @@ Route::get('/spa', function () {
     ]);
 });
 
-Route::group(['middleware'=> ['auth:sanctum', 'verified']], function () {
-    Route::get('/dashboard', function () {return Inertia::render('Dashboard');})->name('dashboard');
+Route::group(['middleware' => ['auth:sanctum', 'verified', 'admin']], function () {
+    Route::get('/dashboard', function () { return Inertia::render('Dashboard');})->name('dashboard');
+    Route::group(['prefix' => 'admin',], function () {
+        Route::group(['prefix' => 'users',], function () {
+            Route::get('/', [UsersController::class, 'index'])->name('admin.users');
+            Route::get('/create', [UsersController::class, 'create'])->name('admin.users.create');
+        });
+    });
 });
 
-Route::group(['prefix'=>'admin', 'middleware'=> ['auth:sanctum', 'verified']], function () {
-    Route::get('/users', [\App\Http\Controllers\Admin\UsersController::class, 'index'])->name('admin.users');
-});
+
