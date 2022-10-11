@@ -45,7 +45,7 @@ services:
         volumes:
             - ./:/var/www/yarlykov
         ports:
-            - "27017:27017"
+            - "27017"
         networks:
             - yarlykov_network
 networks:
