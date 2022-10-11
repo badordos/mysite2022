@@ -94,10 +94,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <h2 class="h2 fw-light mb-4">About Me</h2>
-                            <p>Hello! I’m Vladislav Yarlykov. I am passionate about web development.
-                                I am a middle <strong>back-end developer with PHP/Laravel</strong>
-{{--                                and begginer developer with C#/Unity.--}}
-                            </p>
+                            <p>{{$data['about'] ?? ''}}</p>
                         </div>
                         <div class="col-md-5 offset-lg-1">
                             <div class="row mt-2">
@@ -106,31 +103,35 @@
                                     <div class="pb-2 fw-bolder"><i class="far fa-calendar-alt pe-2 text-muted" style="width:24px;opacity:0.85;"></i>Age</div>
                                 </div>
                                 <div class="col-sm-7">
-                                    <div class="pb-2">{{\Carbon\Carbon::parse('12.02.1992')->diffInYears(\Carbon\Carbon::now())}}</div>
+                                    <div class="pb-2">{{$data['age']}}</div>
                                 </div>
                                 <div class="col-sm-5">
                                     <div class="pb-2 fw-bolder"><i class="far fa-envelope pe-2 text-muted" style="width:24px;opacity:0.85;"></i>Email</div>
                                 </div>
                                 <div class="col-sm-7">
-                                    <div class="pb-2">badordos@gmail.com</div>
+                                    <div class="pb-2">{{$data['email']}}</div>
                                 </div>
                                 <div class="col-sm-5">
                                     <div class="pb-2 fw-bolder"><i class="fab fa-skype pe-2 text-muted" style="width:24px;opacity:0.85;"></i>Telegram</div>
                                 </div>
                                 <div class="col-sm-7">
-                                    <div class="pb-2">@v_ordos</div>
+                                    <div class="pb-2"><a href="https://t.me/{{$data['telegram']}}">{{'@'.$data['telegram']}}</a></div>
                                 </div>
                                 <div class="col-sm-5">
                                     <div class="pb-2 fw-bolder"><i class="fas fa-phone pe-2 text-muted" style="width:24px;opacity:0.85;"></i>Phone</div>
                                 </div>
                                 <div class="col-sm-7">
-                                    <div class="pb-2">+79326161120</div>
+                                    <div class="pb-2">
+                                        @foreach($data['phones'] as $phone)
+                                            <span><a href=tel:{{$phone}}>{{$phone}}</a></span><br>
+                                        @endforeach
+                                    </div>
                                 </div>
                                 <div class="col-sm-5">
                                     <div class="pb-2 fw-bolder"><i class="fas fa-map-marker-alt pe-2 text-muted" style="width:24px;opacity:0.85;"></i>Dislocation</div>
                                 </div>
                                 <div class="col-sm-7">
-                                    <div class="pb-2">Russia, Yekaterinburg</div>
+                                    <div class="pb-2">{{$data['dislocation']}}</div>
                                 </div>
                             </div>
                         </div>
@@ -390,8 +391,8 @@
                     <div class="row mb-6">
                         <div class="col-md-6" data-aos="fade-center" data-aos-delay="200">
                             <div class="mt-1">
-                                <div class="h6"><i class="fas fa-phone pe-2 text-muted" style="width:24px;opacity:0.85;"></i> +79326161120</div>
-                                <div class="h6"><i class="far fa-envelope pe-2 text-muted" style="width:24px;opacity:0.85;"></i> badordos@gmail.com</div>
+                                <div class="h6"><i class="fas fa-phone pe-2 text-muted" style="width:24px;opacity:0.85;"></i> {{$data['phones'][0]}}</div>
+                                <div class="h6"><i class="far fa-envelope pe-2 text-muted" style="width:24px;opacity:0.85;"></i> {{$data['email']}}</div>
                             </div>
                             <div class="mt-5 d-print-none">
                                 <form action="{{route('cv.sendMail')}}" method="POST">
