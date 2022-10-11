@@ -15,6 +15,7 @@ RUN apt-get install -y nodejs npm
 RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer
 RUN alias composer='php /usr/bin/composer'
 
+#INSTALL ZIP
 RUN apt-get update && apt-get install -y \
     zlib1g-dev \
     libzip-dev \
