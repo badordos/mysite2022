@@ -15,6 +15,12 @@ RUN apt-get install -y nodejs npm
 RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer
 RUN alias composer='php /usr/bin/composer'
 
+RUN apt-get update && apt-get install -y \
+    zlib1g-dev \
+    libzip-dev \
+    unzip
+RUN docker-php-ext-install zip
+
 # Set working directory
 WORKDIR /var/www/yarlykov
 
