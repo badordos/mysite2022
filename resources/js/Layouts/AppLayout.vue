@@ -22,7 +22,7 @@
                                 <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </jet-nav-link>
-                                <jet-nav-link :href="route('admin.users')" :active="route().current('admin.users')">
+                                <jet-nav-link :href="route('users.index')" :active="route().current('users.index')">
                                     Users
                                 </jet-nav-link>
                             </div>

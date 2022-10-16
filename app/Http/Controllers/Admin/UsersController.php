@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\AdminUserStoreRequest;
 use App\Http\Resources\Admin\UserResource;
 use App\Models\User;
 use App\Repositories\UsersRepo;
+use Carbon\Carbon;
+use Carbon\Exceptions\Exception;
 use Illuminate\Http\Request;
 use Laravel\Jetstream\Jetstream;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -41,14 +44,24 @@ class UsersController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param \App\Http\Requests\Admin\AdminUserStoreRequest $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(AdminUserStoreRequest $request)
     {
-        //
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->is_admin = $request->is_admin ? true : false;
+        $user->email_verified_at = $request->email_verified_at ? Carbon::parse($request->email_verified_at) : null;
+        $user->save();
+
+        if($request->profile_photo_url){ //TODO check
+            $user->updateProfilePhoto($request->profile_photo_url);
+        }
+
+        return redirect(route('users.index'));
     }
 
     /**

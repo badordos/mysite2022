@@ -49,9 +49,7 @@
                 </div>
             </div>
         </div>
-
-        <br>
-        <Pagination :links="data"></Pagination>
+        <Pagination class="mt-6" :links="data"></Pagination>
     </div>
 </template>
 
