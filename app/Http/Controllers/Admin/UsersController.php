@@ -55,11 +55,10 @@ class UsersController extends Controller
         $user->password = bcrypt($request->password);
         $user->is_admin = $request->is_admin ? true : false;
         $user->email_verified_at = $request->email_verified_at ? Carbon::parse($request->email_verified_at) : null;
-        $user->save();
-
-        if($request->profile_photo_url){ //TODO check
+        if($request->profile_photo_url){
             $user->updateProfilePhoto($request->profile_photo_url);
         }
+        $user->save();
 
         return redirect(route('users.index'));
     }

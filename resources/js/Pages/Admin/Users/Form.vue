@@ -45,18 +45,13 @@
                     />
                     <InputError :message="form.errors.email_verified_at" class="mt-2"></InputError>
 
-<!--                    <Label class="mt-2" for="profile_photo_url" value="Profile photo"/>-->
-<!--                    <Input id="profile_photo_url" type="file" class="mt-1"-->
-<!--                           v-model="form.profile_photo_url" ref="profile_photo_url"-->
-<!--                    />-->
-
                     <div class="mt-5">
                         <input type="file" ref="file" class="hidden" @change="isUploadedFile = true">
                         <Button type="button" @click.native.prevent="selectNewFile">
                             Add photo
                         </Button>
-                        <span class="text-xs text-green-400 ml-2" v-if="!isUploadedFile">10mb max</span>
-                        <span class="text-xs text-green-400 ml-2" v-if="isUploadedFile">Uploaded</span>
+                        <span class="text-xs text-black-400 ml-2" v-if="!isUploadedFile">10mb max</span>
+                        <span class="text-xs text-blue-700-400 ml-2" v-if="isUploadedFile">Uploaded</span>
                         <span class="text-xs text-red-400 ml-2 cursor-pointer" v-if="isUploadedFile"
                               @click="removeUploadedFile">Remove</span>
                         <InputError :message="form.errors.profile_photo_url" class="mt-2"/>
@@ -110,6 +105,10 @@ export default {
     methods: {
         selectNewFile() {
             this.$refs.file.click();
+        },
+        removeUploadedFile() {
+            this.$refs.file.value = null;
+            this.isUploadedFile = false;
         },
 
         save() {
