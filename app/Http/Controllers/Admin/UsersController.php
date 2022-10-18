@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AdminUserStoreRequest;
+use App\Http\Requests\Admin\AdminUserUpdateRequest;
 use App\Http\Resources\Admin\UserResource;
 use App\Models\User;
 use App\Repositories\UsersRepo;
@@ -15,7 +16,9 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class UsersController extends Controller
 {
-    public function __construct(private UsersRepo $usersRepo){}
+    public function __construct(private UsersRepo $usersRepo)
+    {
+    }
 
     /**
      * @param \Illuminate\Http\Request $request
@@ -23,11 +26,13 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        $users = QueryBuilder::for(User::class, $request)
-            ->allowedFilters(['id','name','email','is_admin','active'])
-            ->allowedSorts(['id','name','email','is_admin','active'])
-            ->paginate(10)
-            ->appends($request->query());
+        $users = QueryBuilder::for(User::class, $request)->allowedFilters([
+                'id',
+                'name',
+                'email',
+                'is_admin',
+                'active',
+            ])->allowedSorts(['id', 'name', 'email', 'is_admin', 'active'])->paginate(10)->appends($request->query());
 
         return Jetstream::inertia()->render($request, 'Admin/Users/Index', [
             'users' => $users,
@@ -40,7 +45,9 @@ class UsersController extends Controller
      */
     public function create(Request $request)
     {
-        return Jetstream::inertia()->render($request, 'Admin/Users/Form', []);
+        return Jetstream::inertia()->render($request, 'Admin/Users/Form', [
+            'userData' => false,
+        ]);
     }
 
     /**
@@ -53,9 +60,9 @@ class UsersController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-        $user->is_admin = $request->is_admin ? true : false;
+        $user->is_admin = $request->is_admin;
         $user->email_verified_at = $request->email_verified_at ? Carbon::parse($request->email_verified_at) : null;
-        if($request->profile_photo_url){
+        if ($request->profile_photo_url) {
             $user->updateProfilePhoto($request->profile_photo_url);
         }
         $user->save();
@@ -70,29 +77,42 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = $this->usersRepo->getById($id);
+
         return new UserResource($user);
     }
 
     /**
-     * @param $id
-     * @return UserResource
-     */
-    public function edit($id)
-    {
-        $user = $this->usersRepo->getById($id);
-        return new UserResource($user);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
-    public function update(Request $request, $id)
+    public function edit(int $id)
     {
-        //
+        return Jetstream::inertia()->render(request(), 'Admin/Users/Form', [
+            'userData' => User::findOrFail($id),
+        ]);
+    }
+
+    /**
+     * @param \App\Http\Requests\Admin\AdminUserUpdateRequest $request
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function update(AdminUserUpdateRequest $request, $id)
+    {
+        $user = User::find($id);
+        $user->name = $request->name ?? $user->name;
+        $user->email = $request->email ?? $user->email;
+        if ($request->password) {
+            $user->password = bcrypt($request->password);
+        }
+        $user->is_admin = $request->is_admin;
+        $user->email_verified_at = $request->email_verified_at ? Carbon::parse($request->email_verified_at) : null;
+        if ($request->profile_photo_url) {
+            $user->updateProfilePhoto($request->profile_photo_url);
+        }
+        $user->update();
+
+        return redirect(route('users.index'));
     }
 
     /**
@@ -103,11 +123,12 @@ class UsersController extends Controller
     {
         $user = $this->usersRepo->getById($id);
         $delete = $user->delete();
+
         return [
             'flash' => [
-                'message' => $delete ? 'User delete' : 'Something went wrong'
+                'message' => $delete ? 'User delete' : 'Something went wrong',
             ],
-            'status' => $delete
+            'status' => $delete,
         ];
     }
 }

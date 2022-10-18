@@ -24,7 +24,9 @@
                                         <img class="h-10 w-10 rounded-full" :src="user.profile_photo_url" alt="">
                                     </div>
                                     <div class="ml-4">
-                                        <div class="text-sm font-medium text-gray-900">{{user.name}}</div>
+                                        <div class="text-sm font-medium text-gray-900">
+                                            <a class="text-blue-400 hover:text-blue-900" :href="route('users.show', user.id)">{{user.name}}</a>
+                                        </div>
                                     </div>
                                 </div>
                             </td>
@@ -40,8 +42,8 @@
                                 <span v-else class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-600"> not admin </span>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                <a href="#" class="text-red-600 hover:text-red-900"> Delete</a>
+                                <a :href="route('users.edit', user.id)" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                <a :href="route('users.destroy', user.id)" class="text-red-600 hover:text-red-900 ml-3">Delete</a>
                             </td>
                         </tr>
                         </tbody>
