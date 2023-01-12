@@ -50,6 +50,13 @@ services:
             - "27017"
         networks:
             - yarlykov_network
+    npm:
+        image: node:current-alpine
+        volumes:
+            - ./:/var/www/yarlykov
+        entrypoint: ["npm"]
+        working_dir: "/var/www/yarlykov"
+
 networks:
     yarlykov_network:
         driver: bridge
