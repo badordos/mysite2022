@@ -86,6 +86,11 @@
                                                         <i class="fab fa-github"></i><span class="menu-title sr-only">Github</span>
                                                     </a>
                                                 </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="{{$data['linkedIn']}}" title="LinkedIn" target="_blank">
+                                                        <i class="fab fa-linkedin"></i><span class="menu-title sr-only">LinkedIn</span>
+                                                    </a>
+                                                </li>
                                             </ul>
                                         </nav>
                                     </div>
@@ -124,18 +129,18 @@
                                     <div class="pb-2 fw-bolder"><i class="fab fa-skype pe-2 text-muted" style="width:24px;opacity:0.85;"></i>Telegram</div>
                                 </div>
                                 <div class="col-sm-7">
-                                    <div class="pb-2"><a href="https://t.me/{{$data['telegram']}}">{{'@'.$data['telegram']}}</a></div>
+                                    <div class="pb-2"><a target="_blank" href="https://t.me/{{$data['telegram']}}">{{'@'.$data['telegram']}}</a></div>
                                 </div>
-                                <div class="col-sm-5">
-                                    <div class="pb-2 fw-bolder"><i class="fas fa-phone pe-2 text-muted" style="width:24px;opacity:0.85;"></i>Phone</div>
-                                </div>
-                                <div class="col-sm-7">
-                                    <div class="pb-2">
-                                        @foreach($data['phones'] as $phone)
-                                            <span><a href=tel:{{$phone}}>{{$phone}}</a></span><br>
-                                        @endforeach
-                                    </div>
-                                </div>
+{{--                                <div class="col-sm-5">--}}
+{{--                                    <div class="pb-2 fw-bolder"><i class="fas fa-phone pe-2 text-muted" style="width:24px;opacity:0.85;"></i>Phone</div>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-sm-7">--}}
+{{--                                    <div class="pb-2">--}}
+{{--                                        @foreach($data['phones'] as $phone)--}}
+{{--                                            <span><a href=tel:{{$phone}}>{{$phone}}</a></span><br>--}}
+{{--                                        @endforeach--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                                 <div class="col-sm-5">
                                     <div class="pb-2 fw-bolder"><i class="fas fa-map-marker-alt pe-2 text-muted" style="width:24px;opacity:0.85;"></i>Dislocation</div>
                                 </div>
@@ -326,7 +331,7 @@
                     <div class="row mb-6">
                         <div class="col-md-6" data-aos="fade-center" data-aos-delay="200">
                             <div class="mt-1">
-                                <div class="h6"><i class="fas fa-phone pe-2 text-muted" style="width:24px;opacity:0.85;"></i> {{$data['phones'][0]}}</div>
+{{--                                <div class="h6"><i class="fas fa-phone pe-2 text-muted" style="width:24px;opacity:0.85;"></i> {{$data['phones'][0]}}</div>--}}
                                 <div class="h6"><i class="far fa-envelope pe-2 text-muted" style="width:24px;opacity:0.85;"></i> {{$data['email']}}</div>
                             </div>
                             <div class="mt-5 d-print-none">

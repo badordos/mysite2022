@@ -5,29 +5,33 @@ namespace App\Http\Controllers;
 use App\Mail\CVFormMail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 
 class CVController extends Controller
 {
 
     public function welcome()
     {
-        $data = Cache::remember('cv-data', 1, static function() {
-            return [
+        $data =  [
                 'name' => 'Vladislav Yarlykov',
                 'header' => 'back-end developer PHP/Laravel',
                 'github' => 'https://github.com/badordos',
                 'facebook' => 'https://web.facebook.com/profile.php?id=100008204133126',
                 'instagram' => 'https://www.instagram.com/v_ordoss',
+                'linkedIn' => 'https://www.linkedin.com/in/yarlikov/',
                 'age' => Carbon::parse('12.02.1992')->diffInYears(Carbon::now()),
                 'email' => env('ADMIN_MAIL'),
-                'telegram' => 'v_ordoss',
+                'telegram' => 'v_ordos',
                 'phones' => [
                     '+79326161120',
                     '+77054588696',
                 ],
-                'dislocation' => 'Kazakhstan, Astana',
-                'about' => 'Hello! I’m Vladislav Yarlykov. I am passionate about web development. I am a middle back-end developer with PHP/Laravel',
+                'dislocation' => 'Bishkek, Kyrgyzstan',
+                'about' => 'Hello! I’m Vladislav Yarlykov. I am a back-end developer with PHP/Laravel.
+                 I have experience with Yii, Laravel MVC frameworks.
+                 Good knowledge of OOP, SOLID, Elouqment ORM, Git.
+                 At the front, I have experience with jQuery, VueJS.
+                 Work with Redis, MongoDB, Kibana, REST API, Erp integration.
+                 Data in Json, xml.',
                 'skills' => [
                     'PHP/Laravel' => [
                         'value' => 95,
@@ -101,7 +105,6 @@ class CVController extends Controller
 
                 ]
             ];
-        });
 
         return view('cv.welcome', compact('data'));
     }
