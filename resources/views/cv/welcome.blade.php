@@ -126,7 +126,7 @@
                                     <div class="pb-2">{{$data['email']}}</div>
                                 </div>
                                 <div class="col-sm-5">
-                                    <div class="pb-2 fw-bolder"><i class="fab fa-skype pe-2 text-muted" style="width:24px;opacity:0.85;"></i>Telegram</div>
+                                    <div class="pb-2 fw-bolder"><i class="fab fa-telegram pe-2 text-muted" style="width:24px;opacity:0.85;"></i>Telegram</div>
                                 </div>
                                 <div class="col-sm-7">
                                     <div class="pb-2"><a target="_blank" href="https://t.me/{{$data['telegram']}}">{{'@'.$data['telegram']}}</a></div>
