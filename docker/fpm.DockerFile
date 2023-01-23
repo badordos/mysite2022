@@ -22,17 +22,17 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-install zip
 
 # Set working directory
-WORKDIR /var/www/yarykov
+WORKDIR /var/www/yarlykov
 
 # Add user for laravel application
 RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
 
 # Copy existing application directory contents
-COPY . /var/www/yarykov
+COPY . /var/www/yarlykov
 
 # Copy existing application directory permissions
-COPY --chown=www:www . /var/www/yarykov
+COPY --chown=www:www . /var/www/yarlykov
 
 # Change current user to www
 USER www
