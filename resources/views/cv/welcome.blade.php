@@ -25,7 +25,6 @@
     </noscript>
 </head>
 <body class="bg-light" id="top">
-@include('partials.errors')
 <header class="d-print-none">
     <div class="container text-center text-lg-left">
         <div class="pt-4 clearfix">
@@ -55,6 +54,7 @@
 </header>
 <div class="page-content">
     <div class="container">
+        @include('partials.errors')
         <div class="resume-container">
             <div class="shadow-1-strong bg-white my-5" id="intro">
                 <div class="bg-info text-white">
@@ -392,5 +392,8 @@
 <script src="{{asset('js/mdb.min.js?ver=1.2.1')}}"></script>
 <script src="{{asset('js/aos.js?ver=1.2.1')}}"></script>
 <script src="{{asset('js/main.js?ver=1.2.1')}}"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
