@@ -25,6 +25,7 @@
     </noscript>
 </head>
 <body class="bg-light" id="top">
+@include('partials.errors')
 <header class="d-print-none">
     <div class="container text-center text-lg-left">
         <div class="pt-4 clearfix">
@@ -348,6 +349,9 @@
                                     <div class="form-outline mb-4">
                                         <textarea class="form-control" style="resize: none;" id="message" name="text" rows="4" required></textarea>
                                         <label class="form-label" for="message">Message</label>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        {!! app('captcha')->display() !!}
                                     </div>
                                     <button class="btn btn-info btn-block mb-4" type="submit">Send</button>
                                 </form>
