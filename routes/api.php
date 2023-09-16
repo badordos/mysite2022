@@ -19,6 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 //Route::group(['prefix'=>'admin', 'middleware'=> ['auth:sanctum', 'verified']], function () {
-Route::group(['prefix'=>'admin',], function () {
-    Route::get('/users', [\App\Http\Controllers\Admin\UsersController::class,'index'])->name('api.admin.users');
-});
+//Route::group(['prefix'=>'admin',], function () {
+//    Route::get('/users', [\App\Http\Controllers\Admin\UsersController::class,'index'])->name('api.admin.users');
+//});

@@ -11,7 +11,6 @@ use App\Repositories\UsersRepo;
 use Carbon\Carbon;
 use Carbon\Exceptions\Exception;
 use Illuminate\Http\Request;
-use Laravel\Jetstream\Jetstream;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class UsersController extends Controller
